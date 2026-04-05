@@ -40,18 +40,17 @@ export const createRecordController = async (req, res) => {
       });
     }
 
-    // 🔐 Check category belongs to logged-in user
+    // 🔐 Check if category exists
     const { data: category } = await supabase
       .from("categories")
       .select("id")
       .eq("id", category_id)
-      .eq("user_id", req.user.id)
       .single();
 
     if (!category) {
       return res.status(403).send({
         success: false,
-        message: "Invalid category",
+        message: "Category not found",
       });
     }
 
@@ -120,19 +119,18 @@ export const updateRecordController = async (req, res) => {
       });
     }
 
-    // ✨ If category is being updated, validate it belongs to the user
+    // ✨ If category is being updated, validate it exists
     if (updates.category_id) {
       const { data: category } = await supabase
         .from("categories")
         .select("id")
         .eq("id", updates.category_id)
-        .eq("user_id", req.user.id)
         .single();
 
       if (!category) {
         return res.status(403).send({
           success: false,
-          message: "Invalid category",
+          message: "Category not found",
         });
       }
     }

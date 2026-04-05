@@ -3,13 +3,13 @@ import { supabase } from "../config/supabase.js";
 /* =====================================================
    CREATE CATEGORY
 ===================================================== */
-export const createCategoryService = async (userId, categoryData) => {
+export const createCategoryService = async (categoryData) => {
   try {
     const { name, type } = categoryData;
 
     const { data, error } = await supabase
       .from("categories")
-      .insert([{ user_id: userId, name, type }])
+      .insert([{ name, type }])
       .select()
       .single();
 
@@ -30,12 +30,11 @@ export const createCategoryService = async (userId, categoryData) => {
 /* =====================================================
    GET USER CATEGORIES
 ===================================================== */
-export const getCategoriesService = async (userId) => {
+export const getCategoriesService = async () => {
   try {
     const { data, error } = await supabase
       .from("categories")
       .select("id, name, type")
-      .eq("user_id", userId)
       .order("name", { ascending: true });
 
     if (error) {
@@ -55,13 +54,12 @@ export const getCategoriesService = async (userId) => {
 /* =====================================================
    UPDATE CATEGORY
 ===================================================== */
-export const updateCategoryService = async (categoryId, userId, updates) => {
+export const updateCategoryService = async (categoryId, updates) => {
   try {
     const { data, error } = await supabase
       .from("categories")
       .update(updates)
       .eq("id", categoryId)
-      .eq("user_id", userId) // Ownership check
       .select()
       .single();
 
@@ -82,13 +80,12 @@ export const updateCategoryService = async (categoryId, userId, updates) => {
 /* =====================================================
    DELETE CATEGORY
 ===================================================== */
-export const deleteCategoryService = async (categoryId, userId) => {
+export const deleteCategoryService = async (categoryId) => {
   try {
     const { error } = await supabase
       .from("categories")
       .delete()
-      .eq("id", categoryId)
-      .eq("user_id", userId); // Ownership check
+      .eq("id", categoryId);
 
     if (error) {
       return { success: false, message: error.message };

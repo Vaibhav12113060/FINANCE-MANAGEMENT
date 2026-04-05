@@ -12,10 +12,6 @@ export const createCategoryController = async (req, res) => {
   try {
     const { name, type } = req.body;
 
-    if (!req.user?.id) {
-      return res.status(401).send({ success: false, message: "Unauthorized" });
-    }
-
     if (!name || !type) {
       return res.status(400).send({
         success: false,
@@ -30,7 +26,7 @@ export const createCategoryController = async (req, res) => {
       });
     }
 
-    const response = await createCategoryService(req.user.id, { name, type });
+    const response = await createCategoryService({ name, type });
 
     return res.status(response.success ? 201 : 500).send(response);
   } catch (error) {
@@ -47,11 +43,7 @@ export const createCategoryController = async (req, res) => {
 ===================================================== */
 export const getCategoriesController = async (req, res) => {
   try {
-    if (!req.user?.id) {
-      return res.status(401).send({ success: false, message: "Unauthorized" });
-    }
-
-    const response = await getCategoriesService(req.user.id);
+    const response = await getCategoriesService();
 
     return res.status(response.success ? 200 : 500).send(response);
   } catch (error) {
@@ -71,14 +63,8 @@ export const updateCategoryController = async (req, res) => {
     const { id } = req.params;
     const updates = req.body;
 
-    if (!req.user?.id) {
-      return res.status(401).send({ success: false, message: "Unauthorized" });
-    }
-
     if (!id) {
-      return res
-        .status(400)
-        .send({ success: false, message: "Category ID is required" });
+      return res.send({ success: false, message: "Category ID is required" });
     }
 
     if (updates.type && !["income", "expense"].includes(updates.type)) {
@@ -88,9 +74,9 @@ export const updateCategoryController = async (req, res) => {
       });
     }
 
-    const response = await updateCategoryService(id, req.user.id, updates);
+    const response = await updateCategoryService(id, updates);
 
-    return res.status(response.success ? 200 : 404).send(response); // 404 if not found or not owned
+    return res.status(response.success ? 200 : 404).send(response);
   } catch (error) {
     return res.status(500).send({
       success: false,
@@ -107,19 +93,13 @@ export const deleteCategoryController = async (req, res) => {
   try {
     const { id } = req.params;
 
-    if (!req.user?.id) {
-      return res.status(401).send({ success: false, message: "Unauthorized" });
-    }
-
     if (!id) {
-      return res
-        .status(400)
-        .send({ success: false, message: "Category ID is required" });
+      return res.send({ success: false, message: "Category ID is required" });
     }
 
-    const response = await deleteCategoryService(id, req.user.id);
+    const response = await deleteCategoryService(id);
 
-    return res.status(response.success ? 200 : 404).send(response); // 404 if not found or not owned
+    return res.status(response.success ? 200 : 404).send(response);
   } catch (error) {
     return res.status(500).send({
       success: false,
