@@ -39,7 +39,7 @@ export const registerController = async (req, res) => {
 
     if (!response.success) {
       const statusCode = response.message.includes("already registered")
-        ? 409
+        ? 409 // Conflict
         : 400;
       return res.status(statusCode).send(response);
     }

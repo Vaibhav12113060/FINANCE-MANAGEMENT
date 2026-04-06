@@ -64,7 +64,12 @@ export const updateCategoryController = async (req, res) => {
     const updates = req.body;
 
     if (!id) {
-      return res.send({ success: false, message: "Category ID is required" });
+      return res
+        .status(400)
+        .send({
+          success: false,
+          message: "Category ID is required in the URL.",
+        });
     }
 
     if (updates.type && !["income", "expense"].includes(updates.type)) {
@@ -94,7 +99,12 @@ export const deleteCategoryController = async (req, res) => {
     const { id } = req.params;
 
     if (!id) {
-      return res.send({ success: false, message: "Category ID is required" });
+      return res
+        .status(400)
+        .send({
+          success: false,
+          message: "Category ID is required in the URL.",
+        });
     }
 
     const response = await deleteCategoryService(id);

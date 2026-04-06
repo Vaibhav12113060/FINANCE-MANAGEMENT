@@ -16,9 +16,13 @@ import {
 export const getDashboardController = async (req, res) => {
   try {
     const response = await getDashboardService(req.user.id, req.user.role);
-    res.send(response);
+    if (!response.success) {
+      return res.status(400).send(response);
+    }
+    return res.status(200).send(response);
   } catch (err) {
-    res.status(500).send({ success: false, message: err.message });
+    console.error("Error in getDashboardController:", err);
+    res.status(500).send({ success: false, message: "Internal server error." });
   }
 };
 
@@ -97,9 +101,13 @@ export const getFilteredAnalysisController = async (req, res) => {
       req.user.role,
       req.query,
     );
-    res.send(response);
+    if (!response.success) {
+      return res.status(400).send(response);
+    }
+    return res.status(200).send(response);
   } catch (err) {
-    res.status(500).send({ success: false });
+    console.error("Error in getFilteredAnalysisController:", err);
+    res.status(500).send({ success: false, message: "Internal server error." });
   }
 };
 
@@ -107,9 +115,13 @@ export const getFilteredAnalysisController = async (req, res) => {
 export const getStatsController = async (req, res) => {
   try {
     const response = await getStatsService(req.user.id, req.user.role);
-    res.send(response);
-  } catch {
-    res.status(500).send({ success: false });
+    if (!response.success) {
+      return res.status(400).send(response);
+    }
+    return res.status(200).send(response);
+  } catch (err) {
+    console.error("Error in getStatsController:", err);
+    res.status(500).send({ success: false, message: "Internal server error." });
   }
 };
 
@@ -117,9 +129,13 @@ export const getStatsController = async (req, res) => {
 export const getYearlyController = async (req, res) => {
   try {
     const response = await getYearlyService();
-    res.send(response);
-  } catch {
-    res.status(500).send({ success: false });
+    if (!response.success) {
+      return res.status(400).send(response);
+    }
+    return res.status(200).send(response);
+  } catch (err) {
+    console.error("Error in getYearlyController:", err);
+    res.status(500).send({ success: false, message: "Internal server error." });
   }
 };
 
@@ -127,9 +143,13 @@ export const getYearlyController = async (req, res) => {
 export const getTopExpensesController = async (req, res) => {
   try {
     const response = await getTopExpensesService();
-    res.send(response);
-  } catch {
-    res.status(500).send({ success: false });
+    if (!response.success) {
+      return res.status(400).send(response);
+    }
+    return res.status(200).send(response);
+  } catch (err) {
+    console.error("Error in getTopExpensesController:", err);
+    res.status(500).send({ success: false, message: "Internal server error." });
   }
 };
 
@@ -137,9 +157,13 @@ export const getTopExpensesController = async (req, res) => {
 export const getCategoryController = async (req, res) => {
   try {
     const response = await getCategoryService();
-    res.send(response);
-  } catch {
-    res.status(500).send({ success: false });
+    if (!response.success) {
+      return res.status(400).send(response);
+    }
+    return res.status(200).send(response);
+  } catch (err) {
+    console.error("Error in getCategoryController:", err);
+    res.status(500).send({ success: false, message: "Internal server error." });
   }
 };
 
@@ -147,9 +171,13 @@ export const getCategoryController = async (req, res) => {
 export const getCategoryTrendController = async (req, res) => {
   try {
     const response = await getCategoryTrendService();
-    res.send(response);
-  } catch {
-    res.status(500).send({ success: false });
+    if (!response.success) {
+      return res.status(400).send(response);
+    }
+    return res.status(200).send(response);
+  } catch (err) {
+    console.error("Error in getCategoryTrendController:", err);
+    res.status(500).send({ success: false, message: "Internal server error." });
   }
 };
 
@@ -157,9 +185,13 @@ export const getCategoryTrendController = async (req, res) => {
 export const getSpikesController = async (req, res) => {
   try {
     const response = await getSpikesService();
-    res.send(response);
-  } catch {
-    res.status(500).send({ success: false });
+    if (!response.success) {
+      return res.status(400).send(response);
+    }
+    return res.status(200).send(response);
+  } catch (err) {
+    console.error("Error in getSpikesController:", err);
+    res.status(500).send({ success: false, message: "Internal server error." });
   }
 };
 
@@ -167,9 +199,13 @@ export const getSpikesController = async (req, res) => {
 export const getRatioController = async (req, res) => {
   try {
     const response = await getRatioService();
-    res.send(response);
-  } catch {
-    res.status(500).send({ success: false });
+    if (!response.success) {
+      return res.status(400).send(response);
+    }
+    return res.status(200).send(response);
+  } catch (err) {
+    console.error("Error in getRatioController:", err);
+    res.status(500).send({ success: false, message: "Internal server error." });
   }
 };
 
@@ -177,8 +213,12 @@ export const getRatioController = async (req, res) => {
 export const getRecentController = async (req, res) => {
   try {
     const response = await getRecentService();
-    res.send(response);
-  } catch {
-    res.status(500).send({ success: false });
+    if (!response.success) {
+      return res.status(400).send(response);
+    }
+    return res.status(200).send(response);
+  } catch (err) {
+    console.error("Error in getRecentController:", err);
+    res.status(500).send({ success: false, message: "Internal server error." });
   }
 };

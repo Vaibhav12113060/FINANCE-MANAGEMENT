@@ -48,9 +48,9 @@ export const createRecordController = async (req, res) => {
       .single();
 
     if (!category) {
-      return res.status(403).send({
+      return res.status(404).send({
         success: false,
-        message: "Category not found",
+        message: "The specified category does not exist.",
       });
     }
 
@@ -113,7 +113,7 @@ export const updateRecordController = async (req, res) => {
       .single();
 
     if (!record) {
-      return res.status(403).send({
+      return res.status(404).send({
         success: false,
         message: "Record not found or unauthorized",
       });
@@ -128,9 +128,9 @@ export const updateRecordController = async (req, res) => {
         .single();
 
       if (!category) {
-        return res.status(403).send({
+        return res.status(404).send({
           success: false,
-          message: "Category not found",
+          message: "The specified category does not exist.",
         });
       }
     }
@@ -167,7 +167,7 @@ export const deleteRecordController = async (req, res) => {
       .single();
 
     if (!record) {
-      return res.status(403).send({
+      return res.status(404).send({
         success: false,
         message: "Record not found or unauthorized",
       });
