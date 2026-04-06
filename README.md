@@ -6,6 +6,10 @@
   <img src="https://img.shields.io/badge/Supabase-3FCF8E?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase"/>
 </p>
 
+<p align="center">
+  <a href="https://finance-management-fypi.onrender.com"><strong>View Live Backend API</strong></a>
+</p>
+
 Welcome to the backend of the Finance Management System. This robust API is engineered with Node.js, Express, and Supabase to provide a secure, multi-tenant platform for financial record management. It features a sophisticated Role-Based Access Control (RBAC) system and a powerful, database-driven analytics suite designed for performance and scalability.
 
 ## Key Features
@@ -194,6 +198,18 @@ npm start
 ```
 
 The server will start on the port specified in your `.env` file (default is 5000) and will be accessible at `http://localhost:5000`.
+
+---
+
+## Deployment
+
+This backend API is deployed on Render, providing a publicly accessible endpoint for a frontend application or testing tools like Postman.
+
+**Live Backend URL:** [https://finance-management-fypi.onrender.com](https://finance-management-fypi.onrender.com)
+
+> **Important:** This link points to a backend API, not a website with a user interface. Clicking it will show a simple text response like `"Finance Backend Running"`.
+
+> **Note:** The free tier on Render may cause the server to spin down after a period of inactivity. The first request after it has spun down might take a few extra seconds to complete.
 
 ---
 
