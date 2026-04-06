@@ -30,7 +30,13 @@ Welcome to the backend of the Finance Management System. This robust API is engi
 
 ## Architectural Highlights
 
+The system is designed with a clean, scalable, and maintainable architecture. The following diagram provides a high-level overview of how the different components interact.
+
 - The system is designed with a clean, scalable, and maintainable architecture.
+
+![System Architecture](./public/architecture_diagram.png)
+
+<br/>
 
 - **Database-Centric Logic:** We leverage Supabase and its underlying PostgreSQL engine to handle complex computations. Instead of pulling large datasets into the application for processing, we use **PostgreSQL Functions (RPC)** to perform analytics calculations directly on the database server. This approach is significantly faster and more memory-efficient.
 
@@ -175,7 +181,7 @@ $$;
 
 The following diagram illustrates the relationships between the core tables in the Supabase database. It provides a clear overview of how `users`, `roles`, `categories`, and `financial_records` are interconnected.
 
-!Database Schema
+![Database Schema](public/SUPABASE_SCHEMA.png)
 
 ---
 
@@ -192,6 +198,12 @@ The server will start on the port specified in your `.env` file (default is 5000
 ---
 
 ## API Reference
+
+The following diagram illustrates the general flow of a request through the API, from the client to the database and back.
+
+!API Request Flow
+
+<br/>
 
 ### API Conventions
 
@@ -227,6 +239,12 @@ The server will start on the port specified in your `.env` file (default is 5000
 ---
 
 ## Roles & Permissions
+
+The application's security model is built around a clear Role-Based Access Control (RBAC) system. The flow of an authenticated request through the permission middleware is illustrated below.
+
+!Role-Based Access Control Flow
+
+<br/>
 
 The application employs a strict Role-Based Access Control (RBAC) model to ensure data security and integrity. There are three distinct roles, each with a specific set of permissions.
 
@@ -266,8 +284,8 @@ The application employs a strict Role-Based Access Control (RBAC) model to ensur
 
 Below is an example of using the CSV download API and the resulting Excel sheet.
 
-!Download CSV API Test
-!Excel Sheet Output
+![Download CSV API Test](public/Download_CSV_API_Test.png)
+![Excel Sheet Output](public/Excel_Sheet.png)
 
 - ❌ **Cannot** create, update, or delete any financial records. Their role is strictly read-only to maintain data integrity.
 - ❌ **Cannot** manage users or categories.
@@ -289,7 +307,7 @@ Below is an example of using the CSV download API and the resulting Excel sheet.
 
 Here is an example of an Admin changing a user's role from `viewer` to `analyst`.
 
-!Changing User Role
+![Changing User Role](public/Changing_Role.png)
 
 ---
 
