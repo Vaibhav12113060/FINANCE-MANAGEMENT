@@ -1,6 +1,10 @@
 # Finance Management System - Backend
 
-!Node.js !Express.js !Supabase !License: MIT
+<p align="center">
+  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js"/>
+  <img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express.js"/>
+  <img src="https://img.shields.io/badge/Supabase-3FCF8E?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase"/>
+</p>
 
 Welcome to the backend of the Finance Management System. This robust API is engineered with Node.js, Express, and Supabase to provide a secure, multi-tenant platform for financial record management. It features a sophisticated Role-Based Access Control (RBAC) system and a powerful, database-driven analytics suite designed for performance and scalability.
 
@@ -25,6 +29,8 @@ Welcome to the backend of the Finance Management System. This robust API is engi
 ---
 
 ## Architectural Highlights
+
+- The system is designed with a clean, scalable, and maintainable architecture.
 
 - **Database-Centric Logic:** We leverage Supabase and its underlying PostgreSQL engine to handle complex computations. Instead of pulling large datasets into the application for processing, we use **PostgreSQL Functions (RPC)** to perform analytics calculations directly on the database server. This approach is significantly faster and more memory-efficient.
 
@@ -257,6 +263,12 @@ The application employs a strict Role-Based Access Control (RBAC) model to ensur
 - ✅ **Can** access the **full suite of advanced analytics endpoints** (`/analytics/analysis/...`). This is their primary function.
 - ✅ **Can** view and filter **all** financial records from **all users** via the raw data API (`/analytics/analysis/raw`).
 - ✅ **Can** download the complete system-wide dataset as a CSV file (`/analytics/analysis/download`).
+
+Below is an example of using the CSV download API and the resulting Excel sheet.
+
+!Download CSV API Test
+!Excel Sheet Output
+
 - ❌ **Cannot** create, update, or delete any financial records. Their role is strictly read-only to maintain data integrity.
 - ❌ **Cannot** manage users or categories.
 
@@ -274,6 +286,10 @@ The application employs a strict Role-Based Access Control (RBAC) model to ensur
 - ✅ **Can** create, update, and delete **any** financial record (`/records`).
 - ✅ **Can** manage the global list of categories (create, update, delete) for the entire application (`/categories`).
 - ✅ **Can** manage users by changing their roles (`/users/:id/role`).
+
+Here is an example of an Admin changing a user's role from `viewer` to `analyst`.
+
+!Changing User Role
 
 ---
 
